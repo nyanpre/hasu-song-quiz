@@ -1,0 +1,204 @@
+/* 蓮ノ空公式サイト風テーマ */
+:root {
+  --hasu-pink: #e87a90;       /* メインの蓮ピンク */
+  --hasu-pink-hover: #d6647a; /* ボタンホバー時の少し濃いピンク */
+  --bg-gradient: linear-gradient(135deg, #ffffff 0%, #fdf0f3 100%);
+  --text-main: #5c4a4d;       /* 真っ黒ではなく、上品な茶灰色 */
+  --text-light: #8e7c7f;
+  --panel-bg: rgba(255, 255, 255, 0.95);
+  --border-light: #f8dadd;
+  --shadow-soft: 0 8px 24px rgba(232, 122, 144, 0.12);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg-gradient);
+  color: var(--text-main);
+  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+}
+
+.app-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+/* --- タブデザイン --- */
+.tab-buttons {
+  display: flex;
+  margin-bottom: 24px;
+  background: white;
+  border-radius: 30px;
+  padding: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-light);
+}
+
+.tab-buttons button {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--text-light);
+  border-radius: 26px;
+  transition: all 0.3s ease;
+}
+
+.tab-buttons button.active {
+  background-color: var(--hasu-pink);
+  color: white;
+  box-shadow: 0 2px 8px rgba(232, 122, 144, 0.4);
+}
+
+/* --- メインパネル --- */
+.content-panel {
+  background: var(--panel-bg);
+  padding: 30px 20px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-light);
+}
+
+h2 {
+  font-size: 20px;
+  margin-top: 0;
+  margin-bottom: 24px;
+  color: var(--hasu-pink);
+  letter-spacing: 1px;
+}
+
+/* --- ボタンデザイン --- */
+.primary-btn {
+  background: linear-gradient(135deg, #f29bb6 0%, #e87a90 100%);
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
+  margin: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 12px rgba(232, 122, 144, 0.3);
+  letter-spacing: 1px;
+}
+
+.primary-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(232, 122, 144, 0.4);
+}
+
+.primary-btn:disabled {
+  background: #e2d8da;
+  color: #a89a9c;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* イントロクイズのアクションボタン */
+.action-buttons button, .controls select {
+  padding: 10px 16px;
+  margin: 5px;
+  font-size: 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border-light);
+  background: white;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.action-buttons button:hover:not(:disabled) {
+  background: var(--hasu-pink);
+  color: white;
+  border-color: var(--hasu-pink);
+}
+
+.action-buttons button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.controls select {
+  outline: none;
+  padding: 8px 12px;
+}
+
+/* --- 結果カード（曲情報） --- */
+.result-card {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px dashed var(--border-light);
+  text-align: center;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.result-card img {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: block;
+  margin: 0 auto;
+}
+
+.result-card .info {
+  margin-top: 16px;
+}
+
+.result-card h3 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+}
+
+.result-card .meta {
+  color: var(--text-light);
+  font-size: 0.85em;
+  margin: 0;
+}
+
+/* --- シェアボタン --- */
+.share-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.share-btn {
+  display: block;
+  flex: 1;
+  text-align: center;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: bold;
+  transition: opacity 0.2s;
+}
+
+.share-btn:hover {
+  opacity: 0.85;
+}
+
+.share-btn.x { background-color: #000; }
+.share-btn.bsky { background-color: #0085ff; }
+
+/* 読み込み中 */
+.loading {
+  text-align: center;
+  padding: 50px;
+  color: var(--hasu-pink);
+  font-weight: bold;
+}
