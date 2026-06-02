@@ -99,6 +99,7 @@ export default function IntroQuiz({ songs }: Props) {
         <label>再生秒数: 
           <select value={playSec} onChange={(e) => setPlaySec(Number(e.target.value))}>
             <option value={0.5}>0.5秒</option>
+            <option value={0.75}>0.75秒</option>
             <option value={1}>1秒</option>
             <option value={2}>2秒</option>
             <option value={3}>3秒</option>
