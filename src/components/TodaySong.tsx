@@ -15,10 +15,19 @@ export default function TodaySong({ songs }: Props) {
   // 1. ローカルストレージから今日の曲を読み込む
   useEffect(() => {
     const savedDate = localStorage.getItem('todayDate');
-    const today = new Date().toLocaleDateString();
+    // 日本時間を強制して日付を取得
+    const today = new Date().toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' });
+    
     if (savedDate === today) {
       const savedSong = localStorage.getItem('todaySong');
-      if (savedSong) setTodaySong(JSON.parse(savedSong));
+      // 💡 "undefined" という異常な文字列が入っていたら無視して消去する
+      if (savedSong && savedSong !== "undefined") {
+        try {
+          setTodaySong(JSON.parse(savedSong));
+        } catch (e) {
+          localStorage.removeItem('todaySong');
+        }
+      }
     }
   }, []);
 
@@ -57,7 +66,8 @@ export default function TodaySong({ songs }: Props) {
 
   // 曲を抽選する処理
   const drawSong = () => {
-    const today = new Date().toLocaleDateString();
+    // 日本時間を強制して日付を取得
+    const today = new Date().toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' });
     if (localStorage.getItem('todayDate') === today) {
       alert("今日はすでに引いています！");
       return;

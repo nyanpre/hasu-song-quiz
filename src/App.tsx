@@ -12,16 +12,24 @@ function App() {
   const [songs, setSongs] = useState<Song[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  useEffect(() => {
-    // 💡 ダミーデータではなく、APIから本物のデータを取得（Fetch）する
+useEffect(() => {
     fetch(API_URL)
-      .then(res => res.json())
-      .then((data: Song[]) => {
-        setSongs(data);
+      .then(res => {
+        if (!res.ok) throw new Error("APIサーバーがエラーを返しました");
+        return res.json();
+      })
+      .then((data) => {
+        // 💡 ちゃんと配列（リスト）が返ってきたかチェックする
+        if (Array.isArray(data)) {
+          setSongs(data);
+        } else {
+          setSongs([]);
+        }
         setLoading(false);
       })
       .catch(err => {
         console.error("データの取得に失敗しました", err);
+        setSongs([]); // エラー時は空にする
         setLoading(false);
       });
   }, []);
